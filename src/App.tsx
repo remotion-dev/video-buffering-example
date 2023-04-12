@@ -1,5 +1,5 @@
 import "./App.css";
-import { Player, PlayerRef } from "@remotion/player";
+import { Player, PlayerRef, RenderPoster } from "@remotion/player";
 import { MyComp } from "./MyComp";
 import { useCallback, useRef, useState } from "react";
 import { AbsoluteFill } from "remotion";
@@ -8,19 +8,26 @@ import { BufferManager } from "./BufferManager";
 function App() {
   const playerRef = useRef<PlayerRef>(null);
   const [buffering, setBuffering] = useState(false);
+  let pausedBecauseOfBuffering = useRef(false);
 
   const onBuffer = useCallback(() => {
     setBuffering(true);
+
     playerRef.current?.pause();
+    pausedBecauseOfBuffering.current = true;
   }, []);
 
   const onContinue = useCallback(() => {
     setBuffering(false);
 
-    playerRef.current?.play();
+    // Play only if we paused because of buffering
+    if (pausedBecauseOfBuffering.current) {
+      pausedBecauseOfBuffering.current = false;
+      playerRef.current?.play();
+    }
   }, []);
 
-  const renderPoster = useCallback(() => {
+  const renderPoster: RenderPoster = useCallback(() => {
     if (buffering) {
       return (
         <AbsoluteFill

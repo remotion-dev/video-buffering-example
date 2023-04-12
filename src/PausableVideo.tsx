@@ -47,8 +47,11 @@ const PausableVideoFunction: React.ForwardRefRenderFunction<
     return () => {
       current.removeEventListener("canplay", onPlay);
       current.removeEventListener("waiting", onBuffer);
+
+      // If unmount, unblock buffering
+      canPlay(id);
     };
-  }, []);
+  }, [canPlay, id, needsToBuffer]);
 
   if (Internals.getRemotionEnvironment() === "rendering") {
     return <OffthreadVideo {...props} src={src as string}></OffthreadVideo>;

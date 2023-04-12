@@ -30,24 +30,30 @@ export const BufferManager: React.FC<{
     } else if (!currentState.current && previousState) {
       onContinue();
     }
-  }, []);
+  }, [onBuffer, onContinue]);
 
-  const canPlay = useCallback((id: string) => {
-    bufferState.current[id] = false;
-    sendEvents();
-  }, []);
+  const canPlay = useCallback(
+    (id: string) => {
+      bufferState.current[id] = false;
+      sendEvents();
+    },
+    [sendEvents]
+  );
 
-  const needsToBuffer = useCallback((id: string) => {
-    bufferState.current[id] = true;
-    sendEvents();
-  }, []);
+  const needsToBuffer = useCallback(
+    (id: string) => {
+      bufferState.current[id] = true;
+      sendEvents();
+    },
+    [sendEvents]
+  );
 
   const bufferEvents = useMemo(() => {
     return {
       canPlay,
       needsToBuffer,
     };
-  }, []);
+  }, [canPlay, needsToBuffer]);
 
   return (
     <BufferContext.Provider value={bufferEvents}>
