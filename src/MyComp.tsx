@@ -1,5 +1,6 @@
 import React from "react";
-import { Series, Video } from "remotion";
+import { Series } from "remotion";
+import { PausableVideo } from "./PausableVideo";
 
 export const MyComp: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ export const MyComp: React.FC = () => {
         Video will start shortly
       </Series.Sequence>
       <Series.Sequence durationInFrames={100}>
-        <Video src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></Video>
+        <PausableVideo src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></PausableVideo>
       </Series.Sequence>
     </Series>
   );
