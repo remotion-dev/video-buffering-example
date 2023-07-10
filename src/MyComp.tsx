@@ -11,7 +11,7 @@ export const MyComp: React.FC = () => {
           justifyContent: "center",
           alignItems: "center",
           fontSize: 50,
-          backgroundColor: "black",
+          backgroundColor: "yellow",
         }}
       >
         Video will start shortly
