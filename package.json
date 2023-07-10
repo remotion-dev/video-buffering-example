@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@remotion/player": "3.3.92",
+    "@remotion/player": "4.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "remotion": "3.3.92"
+    "remotion": "4.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
